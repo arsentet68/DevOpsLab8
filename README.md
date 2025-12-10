@@ -68,6 +68,7 @@ services:
 
 ## 2. Собираем мониторинг (prometheus+grafana)
 Создаём каталог для проекта
+
 <img width="296" height="158" alt="image" src="https://github.com/user-attachments/assets/a1de12e2-183b-43bd-979c-8d8a09e7e09d" />
 
 ### Создаём compose.yaml для Prometheus+Grafana
@@ -140,4 +141,5 @@ datasources:
 ```
 
 ### Запускаем оба сервис-контейнера Prometheus+Grafana
+
 <img width="1483" height="439" alt="image" src="https://github.com/user-attachments/assets/cdbf3270-8bd0-400e-b0f7-2319f705b909" />
