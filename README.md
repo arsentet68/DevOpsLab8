@@ -57,8 +57,11 @@ services:
     image: "redis:alpine"
 ```
 ### Запускаем оба сервис-контейнера Flask+Redis
+
 <img width="1487" height="882" alt="image" src="https://github.com/user-attachments/assets/2d96e9b3-cda9-4dde-92fe-2021e8a6047e" />
+
 ### Проверка стека Flask+Redis
+
 <img width="1411" height="90" alt="image" src="https://github.com/user-attachments/assets/1d6a5f29-e1e6-4770-87ba-fd54edeb04e1" />
 <img width="579" height="135" alt="image" src="https://github.com/user-attachments/assets/543b5ff6-e366-4fe3-8c96-3bd31c52cada" />
 <img width="343" height="138" alt="image" src="https://github.com/user-attachments/assets/ada0b395-ad82-4640-aad3-f69d7219056d" />
