@@ -8,6 +8,7 @@ sudo apt install docker-compose-v2
 Создаём каталог для проекта
 
 <img width="325" height="137" alt="image" src="https://github.com/user-attachments/assets/2521f4f9-45b2-43de-8010-d27ddf08553a" />
+
 ### Создаём веб-приложение (app.py)
 ```
 import time
