@@ -143,3 +143,81 @@ datasources:
 ### Запускаем оба сервис-контейнера Prometheus+Grafana
 
 <img width="1483" height="439" alt="image" src="https://github.com/user-attachments/assets/cdbf3270-8bd0-400e-b0f7-2319f705b909" />
+
+### Проверка мониторинга Prometheus+Grafana
+
+<img width="1316" height="98" alt="image" src="https://github.com/user-attachments/assets/6690e558-f603-41d3-8e49-8589dc584026" />
+
+<img width="1217" height="877" alt="image" src="https://github.com/user-attachments/assets/84b61241-21f4-4a8b-9880-ba1ca8b2fc5d" />
+
+### Смотрим метрику самого Prometheus
+
+<img width="1910" height="878" alt="image" src="https://github.com/user-attachments/assets/16d8eb6b-bd41-48eb-b811-aa96e5c4a982" />
+
+### Добавляем мониторинг нашего Flask-приложения (и не только)
+
+Добавим новый контейнер blackbox в compose.yaml:
+
+```
+  blackbox:
+      image: prom/blackbox-exporter
+      container_name: blackbox
+      ports:
+        - 9115:9115
+```
+
+Обновим конфиг prometheus, добавим в scrape_configs указания что мониторить через blackbox
+
+```
+- job_name: blackbox-http
+  metrics_path: /probe
+  params:
+    module: [http_2xx]
+  static_configs:
+    - targets:
+      - http://10.0.2.15:8000
+      - https://etis.psu.ru
+      - https://student.psu.ru
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: instance
+    - target_label: __address__
+      replacement: blackbox:9115
+```
+
+### Пересобираем стек мониторинга
+
+Выключаем старую сборку контейнеров мониторинга
+
+<img width="567" height="113" alt="image" src="https://github.com/user-attachments/assets/10d650a1-680d-4b63-ba3b-004ec08db5bb" />
+
+Запускаем новую сборку контейнеров мониторинга
+
+```
+docker compose build
+docker compose up -d
+```
+
+<img width="563" height="266" alt="image" src="https://github.com/user-attachments/assets/74e56f54-bdb8-4731-aa60-1c9f357496d3" />
+
+### Проверка экспортера
+
+<img width="1089" height="267" alt="image" src="https://github.com/user-attachments/assets/1c3f713e-f2d9-45e5-9d8f-ecfe97566afb" />
+
+### Создаем дашборд
+
+<img width="1198" height="478" alt="image" src="https://github.com/user-attachments/assets/45545f9e-affe-4342-ad4b-c48356fa531b" />
+
+<img width="811" height="719" alt="image" src="https://github.com/user-attachments/assets/5d5bf182-a9f1-453d-a12d-a8bf9ee794a4" />
+
+### Проверяем отображение метрик на дашборде
+
+<img width="1885" height="813" alt="image" src="https://github.com/user-attachments/assets/e543b877-d6d4-4c37-a4d7-e7c084ec9825" />
+
+
+
+
+
+
